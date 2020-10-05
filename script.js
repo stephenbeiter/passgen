@@ -17,48 +17,61 @@ function generatePassword() {
     if (!pwChar && !pwNumber && !pwLower && !pwUpper) {
       alert("You must confirm a minimum of one criteria");
       generatePassword();
-    } else if (pwChar && pwNumber && pwLower && pwUpper) {
+    }
+    // All options
+    else if (pwChar && pwNumber && pwLower && pwUpper) {
       pwOptions = charOptions.concat(numOptions, lowOptions, upOptions);
-      console.log(pwOptions);
-    } else if (pwChar && pwNumber && pwLower && !pwUpper) {
+    }
+    // Three options
+    else if (pwChar && pwNumber && pwLower && !pwUpper) {
       pwOptions = charOptions.concat(numOptions, lowOptions);
-      console.log(pwOptions);
-    } else if (pwChar && pwNumber && !pwLower && !pwUpper) {
+    } else if (pwChar && pwNumber && !pwLower && pwUpper) {
+      pwOptions = charOptions.concat(numOptions, upOptions);
+    } else if (pwChar && !pwNumber && pwLower && pwUpper) {
+      pwOptions = charOptions.concat(lowOptions, upOptions);
+    } else if (!pwChar && !pwNumber && pwLower && pwUpper) {
+      pwOptions = numOptions.concat(lowOptions, upOptions);
+    }
+    //  Two options
+    else if (pwChar && pwNumber && !pwLower && !pwUpper) {
       pwOptions = charOptions.concat(numOptions);
-      console.log(pwOptions);
+    } else if (pwChar && !pwNumber && pwLower && !pwUpper) {
+      pwOptions = charOptions.concat(lowOptions);
+    } else if (!pwChar && pwNumber && pwLower && !pwUpper) {
+      pwOptions = numOptions.concat(lowOptions);
+    } else if (pwChar && !pwNumber && !pwLower && pwUpper) {
+      pwOptions = charOptions.concat(upOptions);
+    } else if (!pwChar && pwNumber && !pwLower && pwUpper) {
+      pwOptions = numOptions.concat(upOptions);
+    } else if (!pwChar && !pwNumber && pwLower && pwUpper) {
+      pwOptions = lowOptions.concat(upOptions);
+    }
+    // One option
+    else if (!pwChar && !pwNumber && !pwLower && pwUpper) {
+      pwOptions = upOptions;
+    } else if (!pwChar && !pwNumber && pwLower && !pwUpper) {
+      pwOptions = lowOptions;
+    } else if (!pwChar && pwNumber && !pwLower && !pwUpper) {
+      pwOptions = numOptions;
     } else if (pwChar && !pwNumber && !pwLower && !pwUpper) {
       pwOptions = charOptions;
-      console.log(pwOptions);
-    } else if (!pwChar && pwNumber && pwLower && pwUpper) {
-      pwOptions = pwNumber.concat(pwLower, pwUpper);
-      console.log(pwOptions);
-    } else if (!pwChar && pwNumber && pwLower && !pwUpper) {
-      pwOptions = pwNumber.concat(pwLower);
-      console.log(pwOptions);
-    } else if (!pwChar && pwNumber && !pwLower && !pwUpper) {
-      pwOptions = pwNumber;
-      console.log(pwOptions);
-    } else if (!pwChar && !pwNumber && pwLower && pwUpper) {
-      pwOptions = pwLower.concat(pwUpper);
-      console.log(pwOptions);
-    } else if (!pwChar && !pwNumber && pwLower && !pwUpper) {
-      pwOptions = pwNumber;
-      console.log(pwOptions);
-    } else if (!pwChar && !pwNumber && !pwLower && pwUpper) {
-      pwOptions = pwUpper;
-      console.log(pwOptions);
+    };
+
+    var pwArray = [];
+
+    for (i = 0; i < pwLength; i++) {
+      var pwValues = pwOptions[Math.floor(Math.random() * pwOptions.length)];
+      pwArray.push(pwValues);
     }
+
+    password = pwArray.join("");
+    return password;
+
   } else {
     alert("Not a valid input.  You must enter a number between 8-128");
     generatePassword();
   };
-
-
-
-
-
-
-}
+};
 
 // Get references to the #generate element
 var generateBtn = document.querySelector("#generate");
@@ -69,8 +82,6 @@ function writePassword() {
   var passwordText = document.querySelector("#password");
 
   passwordText.value = password;
-
-  console.log(password);
 
 }
 
