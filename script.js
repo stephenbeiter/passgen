@@ -16,7 +16,8 @@ function generatePassword() {
     var pwUpper = confirm("Do you want to include upper case letters?");
     if (!pwChar && !pwNumber && !pwLower && !pwUpper) {
       alert("You must confirm a minimum of one criteria");
-      generatePassword();
+      return generatePassword();
+
     }
     // All options
     else if (pwChar && pwNumber && pwLower && pwUpper) {
@@ -69,8 +70,8 @@ function generatePassword() {
 
   } else {
     alert("Not a valid input.  You must enter a number between 8-128");
-    generatePassword();
-  };
+    return generatePassword();
+  }
 };
 
 // Get references to the #generate element
